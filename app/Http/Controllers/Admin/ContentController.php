@@ -35,17 +35,18 @@ class ContentController extends Controller
     {
         $data = $request->all();
 
+
         $newContent = new Content();
 
-        $newContent =$data["title"];
-         $newContent =$data["category->name"];
-          $newContent =$data["time_needed_visiting"];
-           $newContent =$data["mood_tag"];
-            $newContent =$data["description"];
+        $newContent->title = $data["title"];
+         $newContent->category_id = $data["category_id"];
+          $newContent->time_needed_visiting  = $data["time_needed_visiting"];
+           $newContent->mood_tag  = $data["mood_tag"];
+            $newContent->description  = $data["description"];
 
-            $newContent->Save();
+            $newContent->save();
 
-            return redirect()->view("contents.show", $newContent);
+            return redirect()->route("admin.contents.show", $newContent);
     }
 
     /**
@@ -59,9 +60,9 @@ class ContentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Content $content)
     {
-        //
+        return view("contents.edit");
     }
 
     /**
