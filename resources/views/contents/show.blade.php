@@ -13,7 +13,7 @@
             </a>
 
             <div class="d-flex gap-2">
-                <a href="#" class="btn btn-sm text-white px-3 py-2 d-flex align-items-center shadow-sm" 
+                <a href="{{route("admin.contents.edit", $content)}}" class="btn btn-sm text-white px-3 py-2 d-flex align-items-center shadow-sm" 
                    style="background-color: #5a6b7a; border-color: #5a6b7a; font-size: 0.85rem; border-radius: 6px; font-weight: 500;">
                     <i class="bi bi-pencil me-1"></i> Modifica Contenuto
                 </a>

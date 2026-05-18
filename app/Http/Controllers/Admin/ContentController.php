@@ -61,16 +61,31 @@ class ContentController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Content $content)
+
     {
-        return view("contents.edit");
+        $categories =Category::all();
+        return view("contents.edit", compact("content", "categories"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Content $content)
     {
-        //
+         $data = $request->all();
+
+
+
+
+        $content->title = $data["title"];
+         $content->category_id = $data["category_id"];
+          $content->time_needed_visiting  = $data["time_needed_visiting"];
+           $content->mood_tag  = $data["mood_tag"];
+            $content->description  = $data["description"];
+
+            $content->update();
+
+            return redirect()->route("admin.contents.show", $content);
     }
 
     /**
