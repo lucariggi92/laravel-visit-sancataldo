@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\ContentsController;
+use App\Http\Controllers\Admin\ContentController;
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -24,7 +24,7 @@ Route::middleware(["auth", "verified"])
 ->prefix("admin")
 ->group(function(){
 
-Route::get("/contents", [ContentsController::class, "index"])
+Route::get("/contents", [ContentController::class, "index"])
 ->name("contents.index");
 
 });
