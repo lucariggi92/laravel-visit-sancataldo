@@ -57,15 +57,11 @@
                                 <i class="bi bi-clock text-muted me-1"></i> {{ $content->time_needed_visiting }} min
                             </td>
                             
-                           <td class="pe-4 text-end">
-                                <div class="d-flex justify-content-end gap-2">
-                                    <a href="#" class="btn btn-sm text-white px-3 py-1.5 d-flex align-items-center" 
-                                       style="background-color: #5a6b7a; border-color: #5a6b7a; font-size: 0.8rem; border-radius: 4px;">
-                                        <i class="bi bi-pencil me-1"></i> Modifica
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-danger px-3 py-1.5 d-flex align-items-center" 
-                                       style="border-color: #dc3545; font-size: 0.8rem; border-radius: 4px;">
-                                        <i class="bi bi-trash me-1"></i> Rimuovi
+                          <td class="pe-4 text-end">
+                                <div class="d-flex justify-content-end">
+                                    <a class="btn btn-sm text-white px-3 py-1.5 d-flex align-items-center border-0 shadow-sm" 
+                                       style="background-color: #2d3d4a; font-size: 0.8rem; border-radius: 6px;" href="{{ route("admin.contents.show", $content->id) }}">
+                                        Visualizza
                                     </a>
                                 </div>
                             </td>

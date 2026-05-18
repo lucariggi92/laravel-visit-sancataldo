@@ -24,8 +24,8 @@ Route::middleware(["auth", "verified"])
 ->prefix("admin")
 ->group(function(){
 
-Route::get("/contents", [ContentController::class, "index"])
-->name("contents.index");
+  Route::resource("contents", ContentController::class);
+
 
 });
 

@@ -22,7 +22,7 @@ class ContentController extends Controller
      */
     public function create()
     {
-        //
+      
     }
 
     /**
@@ -36,9 +36,9 @@ class ContentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Content $content)
     {
-        //
+        return view("contents.show", compact("content"));
     }
 
     /**
