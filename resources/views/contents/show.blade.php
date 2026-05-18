@@ -14,14 +14,19 @@
 
             <div class="d-flex gap-2">
                 <a href="{{route("admin.contents.edit", $content)}}" class="btn btn-sm btn-warning text-white px-3 py-2 d-flex align-items-center shadow-sm" 
-                   style="background-color: font-size: 0.85rem; border-radius: 6px; font-weight: 500;">
-                    <i class="bi bi-pencil me-1"></i> Modifica Contenuto
+                  font-size: 0.85rem; border-radius: 6px; font-weight: 500;">
+                   Modifica Contenuto
                 </a>
                 
-                <button class="btn btn-sm btn-danger px-3 py-2 d-flex align-items-center shadow-sm" 
-                        style="font-size: 0.85rem; border-radius: 6px; font-weight: 500;">
-                    <i class="bi bi-trash me-1"></i> Rimuovi
-                </button>
+                <form action="{{route("admin.contents.destroy", $content)}}" method="POST">
+                    @csrf
+                    @method("DELETE")
+                    <input type="submit" class="btn btn-sm btn-danger px-3 py-2 d-flex align-items-center shadow-sm" 
+                        style="font-size: 0.85rem; border-radius: 6px; font-weight: 500;" value="Elimina">
+           
+
+                </form>
+               
             </div>
         </div>
 
