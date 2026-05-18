@@ -14,7 +14,7 @@
                 </h1>
                 <p class="text-muted small m-0 mt-1">Pannello di controllo per i testi e i media del portale.</p>
             </div>
-            <a href="#" class="btn rounded-pill px-4 py-2 fw-semibold text-uppercase shadow-sm text-white border-0" 
+            <a href="{{route("admin.contents.create")}}" class="btn rounded-pill px-4 py-2 fw-semibold text-uppercase shadow-sm text-white border-0" 
                style="background-color: #2d3d4a; font-size: 0.85rem; tracking-spacing: 1px;">
                 <i class="bi bi-plus-lg me-1"></i> Nuovo Contenuto
             </a>

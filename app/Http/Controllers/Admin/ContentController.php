@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Content;
 use Illuminate\Http\Request;
 
+use App\Models\Category;
+
 class ContentController extends Controller
 {
     /**
@@ -22,7 +24,8 @@ class ContentController extends Controller
      */
     public function create()
     {
-      
+         $categories = Category::all();
+         return view("contents.create", compact("categories"));
     }
 
     /**
@@ -30,7 +33,19 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $newContent = new Content();
+
+        $newContent =$data["title"];
+         $newContent =$data["category->name"];
+          $newContent =$data["time_needed_visiting"];
+           $newContent =$data["mood_tag"];
+            $newContent =$data["description"];
+
+            $newContent->Save();
+
+            return redirect()->view("contents.show", $newContent);
     }
 
     /**
