@@ -10,4 +10,9 @@ class Content extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function itineraries()
+{
+    return $this->belongsToMany(Itinerary::class);
+}
 }
