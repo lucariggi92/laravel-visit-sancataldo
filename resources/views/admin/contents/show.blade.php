@@ -31,6 +31,12 @@
         </div>
 
         <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: 16px;">
+
+         @if($content->image)
+        <div id="post-image">
+            <img src="{{asset("storage/" . $content->image)}}" alt="{{ $content->title }}">
+        </div>
+        @endif
             
             <div class="p-4 p-md-5 text-white" style="background-color: #2d3d4a;">
                 <div class="mb-3">

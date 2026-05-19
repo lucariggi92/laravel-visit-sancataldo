@@ -23,7 +23,7 @@
         <div class="card border-0 shadow-sm" style="border-radius: 16px;">
             <div class="card-body p-4 p-md-5 bg-white">
                 
-                <form action="{{ route('admin.contents.update', $content) }}" method="POST">
+                <form action="{{ route('admin.contents.update', $content) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method("PUT")
 
@@ -73,6 +73,22 @@
                         <label for="description" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Descrizione Estesa</label>
                         <textarea name="description" id="description" class="form-control border-2" rows="6" placeholder="Scrivi qui una descrizione dettagliata del luogo o dell'attività..." required style="border-radius: 8px; resize: none;">{{$content->description}}</textarea>
                     </div>
+
+                    <!-- immagine -->
+                    <div class="mb-5">
+                        <label for="image" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Inserisci immagine</label>
+                    <input type="file" name="image" id="image" class="form-control border-2" style="border-radius: 8px; line-height: 30px;">
+
+                      @if($content->image)
+                        <div id="post-image">
+                            <img src="{{asset("storage/" . $content->image)}}" alt="{{ $content->title }}">
+                        </div>
+                      @endif
+
+                    </div>
+
+                    
+                      
 
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn text-white fw-bold text-uppercase px-5 py-3 shadow-sm border-0" 

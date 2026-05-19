@@ -22,7 +22,7 @@
         <div class="card border-0 shadow-sm" style="border-radius: 16px;">
             <div class="card-body p-4 p-md-5 bg-white">
                 
-                <form action="{{ route('admin.contents.store') }}" method="POST">
+                <form action="{{ route('admin.contents.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row mb-4">
@@ -72,10 +72,15 @@
                         <textarea name="description" id="description" class="form-control border-2" rows="6" placeholder="Scrivi qui una descrizione dettagliata del luogo o dell'attività..." required style="border-radius: 8px; resize: none;"></textarea>
                     </div>
 
+                  <div class="mb-5">
+                        <label for="image" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Inserisci immagine</label>
+                    <input type="file" name="image" id="image" class="form-control border-2" style="border-radius: 8px; line-height: 30px;">
+                   </div>
+
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn text-white fw-bold text-uppercase px-5 py-3 shadow-sm border-0" 
                                 style="background-color: #2d3d4a; border-radius: 8px; letter-spacing: 1px; font-size: 0.9rem;">
-                            <i class="bi bi-cloud-check me-2"></i> Salva Contenuto
+                       Salva Contenuto
                         </button>
                     </div>
 

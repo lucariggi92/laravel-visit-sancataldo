@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\itineraries
+use App\Models\Itinerary;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class ItineraryController extends Controller
 {
     public function index(){
 
-    $itineraries = itinerary::all();
+    $itineraries = Itinerary::with('contents.category')->get();
 
     return response()->json(
         [

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Content;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
@@ -44,6 +45,11 @@ class ContentController extends Controller
            $newContent->mood_tag  = $data["mood_tag"];
             $newContent->description  = $data["description"];
 
+            if(array_key_exists("image", $data)){
+                $img_url =Storage::putFile("contents", $data["image"]);
+                $newContent->image = $img_url;
+            }
+
             $newContent->save();
 
             return redirect()->route("admin.contents.show", $newContent);
@@ -82,6 +88,16 @@ class ContentController extends Controller
           $content->time_needed_visiting  = $data["time_needed_visiting"];
            $content->mood_tag  = $data["mood_tag"];
             $content->description  = $data["description"];
+            if(array_key_exists("image", $data)){
+
+            Storage::delete($content->image);
+
+              $img_url =Storage::putFile("contents", $data["image"]);
+               
+              $content->image = $img_url;
+
+
+            }
 
             $content->update();
 
@@ -93,6 +109,10 @@ class ContentController extends Controller
      */
     public function destroy(Content $content)
     {
+
+    if($content->image){
+        Storage::delete($content->image);
+    }
         $content->delete();
         return redirect()->route("admin.contents.index");
     }

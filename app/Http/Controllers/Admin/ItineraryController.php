@@ -39,7 +39,7 @@ class ItineraryController extends Controller
         $newItinerary->description  = $data["description"];
          $newItinerary->save();
 
-            return redirect()->route("admin.itineraries.index", $newItinerary);
+            return redirect()->route("admin.itineraries.index");
     }
 
     /**

@@ -13,6 +13,6 @@ class Content extends Model
 
     public function itineraries()
 {
-    return $this->belongsToMany(Itinerary::class);
+    return $this->belongsToMany(Itinerary::class, "content_itinerary");
 }
 }

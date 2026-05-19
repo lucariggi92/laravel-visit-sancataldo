@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('mood');
-            $table->boolean('wants_food');
+            $table->string('food_preference')->nullable(); // null = non ha fame, altrimenti "spuntino", "cena", "cocktail"
             $table->integer('time_available');
-            $table->foreignId('category_id')->constrained();
             $table->timestamps();
       });
     }
