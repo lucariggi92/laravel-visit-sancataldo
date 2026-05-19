@@ -42,7 +42,7 @@
                             
                             <td>
                                 <span class="badge rounded px-2 py-1.5 fw-medium text-uppercase btn-sm" 
-                                      style="background-color: #e9ecef; color: #2d3d4a; font-size: 0.75rem;">
+                                      style="background-color:  {{ $content->category->color }}; font-size: 0.75rem;">
                                     {{ $content->category->name }}
                                 </span>
                             </td>

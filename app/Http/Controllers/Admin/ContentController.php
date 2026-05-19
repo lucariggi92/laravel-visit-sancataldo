@@ -16,7 +16,7 @@ class ContentController extends Controller
     {
         $contents = Content::all();
 
-        return view("contents.index", compact("contents"));
+        return view("admin.contents.index", compact("contents"));
     }
 
     /**
@@ -25,7 +25,7 @@ class ContentController extends Controller
     public function create()
     {
          $categories = Category::all();
-         return view("contents.create", compact("categories"));
+         return view("admin.contents.create", compact("categories"));
     }
 
     /**
@@ -54,7 +54,7 @@ class ContentController extends Controller
      */
     public function show(Content $content)
     {
-        return view("contents.show", compact("content"));
+        return view("admin.contents.show", compact("content"));
     }
 
     /**
@@ -64,7 +64,7 @@ class ContentController extends Controller
 
     {
         $categories =Category::all();
-        return view("contents.edit", compact("content", "categories"));
+        return view("admin.contents.edit", compact("content", "categories"));
     }
 
     /**

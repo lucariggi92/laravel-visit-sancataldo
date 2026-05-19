@@ -35,7 +35,7 @@
             <div class="p-4 p-md-5 text-white" style="background-color: #2d3d4a;">
                 <div class="mb-3">
                     <span class="badge rounded px-3 py-2 fw-semibold text-uppercase" 
-                          style="background-color: rgba(255, 255, 255, 0.15); color: #fff; font-size: 0.8rem; letter-spacing: 0.5px;">
+                           style="background-color:  {{ $content->category->color }}; color: #fff; font-size: 0.8rem; letter-spacing: 0.5px;">
                         <i class="bi bi-folder2-open me-1"></i> {{ $content->category->name }}
                     </span>
                 </div>
