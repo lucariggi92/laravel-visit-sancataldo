@@ -53,19 +53,23 @@
                         </div>
 
                         <div class="col-md-6 mt-3 mt-md-0">
-                            <label for="mood_tag" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Mood / Tag</label>
-                            <div class="input-group border-2 rounded" style="border-radius: 8px;">
-                                <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-hash"></i></span>
-                                <select name="mood_tag" id="mood_tag" class="form-select border-start-0" style="height: 45px;" required>
-                                    <option value="" selected disabled>Scegli il mood...</option>
-                                    <option value="curioso">CURIOSO</option>
-                                    <option value="affamato">AFFAMATO</option>
-                                    <option value="avventuriero">AVVENTURIERO</option>
-                                    <option value="rilassato">RILASSATO</option>
-                                </select>
+                            <label class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Mood / Tag</label>
+                            <div class="border-2 form-control" style="border-radius: 8px; height: auto; padding: 10px 15px;">
+                                @foreach($moods as $mood)
+                                    <div class="form-check">
+                                        <input 
+                                            class="form-check-input" 
+                                            type="checkbox" 
+                                            name="moods[]" 
+                                            value="{{ $mood->id }}" 
+                                            id="mood_{{ $mood->id }}">
+                                        <label class="form-check-label text-uppercase fw-semibold small" for="mood_{{ $mood->id }}">
+                                            {{ $mood->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-                    </div>
 
                     <div class="mb-5">
                         <label for="description" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Descrizione Estesa</label>

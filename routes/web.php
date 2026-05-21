@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ItineraryController;
+use App\Http\Controllers\Admin\MoodController;
+
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +31,7 @@ Route::middleware(["auth", "verified"])
   Route::resource("contents", ContentController::class);
  Route::resource("categories", CategoryController::class);
  Route::resource("itineraries", ItineraryController::class);
+  Route::resource("moods", MoodController::class);
 
 
 });

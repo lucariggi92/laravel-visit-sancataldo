@@ -9,3 +9,4 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 Route::get("itineraries",[ItineraryController::class, "index"]);
+Route::post("itineraries", [ItineraryController::class, "store"]);

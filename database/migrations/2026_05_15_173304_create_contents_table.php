@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image')->nullable();
-            $table->string('mood_tag')->nullable();;
             $table->integer('time_needed_visiting');
             $table->string('food_type')->nullable();
             $table->timestamps();

@@ -12,7 +12,13 @@ class Content extends Model
     }
 
     public function itineraries()
-{
-    return $this->belongsToMany(Itinerary::class, "content_itinerary");
+    {
+        return $this->belongsToMany(Itinerary::class, "content_itinerary");
+    }
+
+    public function moods()
+    {
+        return $this->belongsToMany(Mood::class, 'content_mood');
+    }
 }
-}
+

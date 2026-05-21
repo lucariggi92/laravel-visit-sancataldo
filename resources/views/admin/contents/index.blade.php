@@ -48,9 +48,12 @@
                             </td>
                             
                             <td>
-                                <span class="text-muted fw-semibold small">
-                                    #{{ strtoupper($content->mood_tag) }}
-                                </span>
+                                @foreach($content->moods as $mood)
+                                    <span class="badge rounded px-2 py-1 me-1 fw-medium text-uppercase"
+                                        style="background-color: #2d3d4a; font-size: 0.7rem;">
+                                        {{ $mood->name }}
+                                    </span>
+                                @endforeach
                             </td>
                             
                             <td class="text-nowrap small text-dark">

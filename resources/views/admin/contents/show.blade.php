@@ -62,12 +62,18 @@
                     <div class="d-none d-md-block border-start"></div>
 
                     <div class="d-flex align-items-center fs-6">
-                        <i class="bi bi-hash me-1 text-primary" style="color: #2d3d4a !important; font-size: 1.3rem;"></i>
-                        <div>
+                       
                             <small class="text-uppercase block text-muted d-block" style="font-size: 0.7rem; letter-spacing: 0.5px;">Mood / Tag</small>
-                            <span class="fw-bold text-dark text-uppercase">{{ $content->mood_tag }}</span>
-                        </div>
-                    </div>
+                                    <div class="d-flex gap-1 flex-wrap mt-1">
+                                        @foreach($content->moods as $mood)
+                                            <span class="badge rounded px-2 py-1 fw-medium text-uppercase"
+                                                style="background-color: #2d3d4a; font-size: 0.7rem;">
+                                                {{ $mood->name }}
+                                            </span>
+                                        @endforeach
+                                  </div>
+                  </div>
+
                 </div>
 
                 <div class="content-text text-secondary lh-lg" style="font-size: 1.1rem; max-width: 800px;">

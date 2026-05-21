@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Content;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
+use App\Models\Mood;
 use App\Models\Category;
 
 class ContentController extends Controller
@@ -26,7 +28,8 @@ class ContentController extends Controller
     public function create()
     {
          $categories = Category::all();
-         return view("admin.contents.create", compact("categories"));
+          $moods = Mood::all(); 
+         return view("admin.contents.create", compact("categories", "moods"));
     }
 
     /**
@@ -38,12 +41,10 @@ class ContentController extends Controller
 
 
         $newContent = new Content();
-
         $newContent->title = $data["title"];
-         $newContent->category_id = $data["category_id"];
-          $newContent->time_needed_visiting  = $data["time_needed_visiting"];
-           $newContent->mood_tag  = $data["mood_tag"];
-            $newContent->description  = $data["description"];
+        $newContent->category_id = $data["category_id"];
+        $newContent->time_needed_visiting  = $data["time_needed_visiting"];
+        $newContent->description  = $data["description"];
 
             if(array_key_exists("image", $data)){
                 $img_url =Storage::putFile("contents", $data["image"]);
@@ -51,6 +52,10 @@ class ContentController extends Controller
             }
 
             $newContent->save();
+
+            if($request->has("moods")){
+              $newContent->moods()->attach($data["moods"]);
+            }
 
             return redirect()->route("admin.contents.show", $newContent);
     }
@@ -70,7 +75,8 @@ class ContentController extends Controller
 
     {
         $categories =Category::all();
-        return view("admin.contents.edit", compact("content", "categories"));
+            $moods = Mood::all();
+        return view("admin.contents.edit", compact("content", "categories", "moods"));
     }
 
     /**
@@ -78,28 +84,27 @@ class ContentController extends Controller
      */
     public function update(Request $request, Content $content)
     {
-         $data = $request->all();
-
-
-
+        $data = $request->all();
 
         $content->title = $data["title"];
-         $content->category_id = $data["category_id"];
-          $content->time_needed_visiting  = $data["time_needed_visiting"];
-           $content->mood_tag  = $data["mood_tag"];
-            $content->description  = $data["description"];
-            if(array_key_exists("image", $data)){
-
+        $content->category_id = $data["category_id"];
+        $content->time_needed_visiting  = $data["time_needed_visiting"];
+        $content->description  = $data["description"];
+            
+        if(array_key_exists("image", $data)){
             Storage::delete($content->image);
-
               $img_url =Storage::putFile("contents", $data["image"]);
-               
               $content->image = $img_url;
-
-
             }
 
+
             $content->update();
+                if($request->has("moods")){
+                    $content->moods()->sync($data["moods"]);
+                } else {
+                    $content->moods()->detach();
+                }
+
 
             return redirect()->route("admin.contents.show", $content);
     }
