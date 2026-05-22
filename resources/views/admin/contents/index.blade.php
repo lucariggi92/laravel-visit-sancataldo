@@ -8,17 +8,20 @@
     <div class="container">
 
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <div>
-                <h1 class="fw-bold text-uppercase tracking-wide m-0" style="color: #2d3d4a; font-size: 2rem;">
-                    Gestione Contenuti
-                </h1>
-                <p class="text-muted small m-0 mt-1">Pannello di controllo per i testi e i media del portale.</p>
-            </div>
-            <a href="{{route("admin.contents.create")}}" class="btn rounded-pill px-4 py-2 fw-semibold text-uppercase shadow-sm text-white border-0" 
-               style="background-color: #2d3d4a; font-size: 0.85rem; tracking-spacing: 1px;">
-                <i class="bi bi-plus-lg me-1"></i> Nuovo Contenuto
-            </a>
-        </div>
+    <div>
+        <h1 class="fw-bold text-uppercase tracking-wide m-0" style="color: #2d3d4a; font-size: 2rem;">
+            Gestione Contenuti
+        </h1>
+        <p class="text-muted small m-0 mt-1">
+            Pannello di controllo per i testi e i media del portale. 
+            <strong style="color: #2d3d4a;">{{ $contents->count() }} elementi totali</strong>
+        </p>
+    </div>
+    <a href="{{route("admin.contents.create")}}" class="btn rounded-pill px-4 py-2 fw-semibold text-uppercase shadow-sm text-white border-0" 
+       style="background-color: #2d3d4a; font-size: 0.85rem;">
+        <i class="bi bi-plus-lg me-1"></i> Nuovo Contenuto
+    </a>
+</div>
         
         <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: 12px;">
             <div class="table-responsive">

@@ -45,6 +45,7 @@ class ContentController extends Controller
         $newContent->category_id = $data["category_id"];
         $newContent->time_needed_visiting  = $data["time_needed_visiting"];
         $newContent->description  = $data["description"];
+        $newContent->food_type = $data["food_type"] ?? null;
 
             if(array_key_exists("image", $data)){
                 $img_url =Storage::putFile("contents", $data["image"]);
@@ -90,9 +91,13 @@ class ContentController extends Controller
         $content->category_id = $data["category_id"];
         $content->time_needed_visiting  = $data["time_needed_visiting"];
         $content->description  = $data["description"];
+        $content->food_type = $data["food_type"] ?? null;
             
         if(array_key_exists("image", $data)){
-            Storage::delete($content->image);
+             if($content->image){
+        Storage::delete($content->image);
+          }
+        
               $img_url =Storage::putFile("contents", $data["image"]);
               $content->image = $img_url;
             }

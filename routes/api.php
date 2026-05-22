@@ -10,3 +10,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("itineraries",[ItineraryController::class, "index"]);
 Route::post("itineraries", [ItineraryController::class, "store"]);
+Route::get('/contents/{content}', [ContentController::class, 'show']);

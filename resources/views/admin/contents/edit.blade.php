@@ -40,15 +40,17 @@
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <label for="title" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Titolo del Contenuto</label>
-                                <input type="text" name="title" id="title" class="form-control border-2" placeholder="Es. Chiesa Madre" required style="border-radius: 8px; height: 45px;">
+                                <input type="text" name="title" id="title" class="form-control border-2" placeholder="Es. Chiesa Madre" required style="border-radius: 8px; height: 45px;" value={{$content->title}}>
                             </div>
 
                             <div class="col-md-6 mt-3 mt-md-0">
                                 <label for="category_id" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Categoria</label>
                                 <select name="category_id" id="category_id" class="form-select border-2" style="height: 45px; border-radius: 8px;" required>
-                                    <option value="" selected disabled>Scegli una categoria...</option>
+                                    <option value="" disabled>Scegli una categoria...</option>
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" {{ $category->id == $content->category_id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -57,18 +59,18 @@
                     
                         {{-- Campo food_type visibile solo se categoria è Food & Drink -------------------}}
                        {{-- nascosto di default --}}
-                    <div class="row mb-4"  id="food_type_wrapper" style="display: none;">
-                            <div class="col-md-6 ms-auto">
-                                <label for="food_type" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Tipo di cibo</label>
-                                <select name="food_type" id="food_type" class="form-select border-2" style="height: 45px; border-radius: 8px;">
-                                    <option value="" selected disabled>Scegli il tipo...</option>
-                                    <option value="colazione">☕ Colazione</option>
-                                    <option value="aperitivo">🍹 Aperitivo</option>
-                                    <option value="pranzo">🍝 Pranzo</option>
-                                    <option value="cena">🍽️ Cena</option>
-                                    <option value="mordi e fuggi">🥪 Mordi e fuggi</option>
-                                </select>
-                            </div>
+                    <div class="row mb-4" id="food_type_wrapper">
+                        <div class="col-md-6 ms-auto">
+                            <label for="food_type" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Tipo di cibo</label>
+                            <select name="food_type" id="food_type" class="form-select border-2" style="height: 45px; border-radius: 8px;">
+                                <option value="" disabled {{ !$content->food_type ? 'selected' : '' }}>Scegli il tipo...</option>
+                                <option value="colazione" {{ $content->food_type == 'colazione' ? 'selected' : '' }}>☕ Colazione</option>
+                                <option value="aperitivo" {{ $content->food_type == 'aperitivo' ? 'selected' : '' }}>🍹 Aperitivo</option>
+                                <option value="pranzo" {{ $content->food_type == 'pranzo' ? 'selected' : '' }}>🍝 Pranzo</option>
+                                <option value="cena" {{ $content->food_type == 'cena' ? 'selected' : '' }}>🍽️ Cena</option>
+                                <option value="mordi e fuggi" {{ $content->food_type == 'mordi e fuggi' ? 'selected' : '' }}>🥪 Mordi e fuggi</option>
+                            </select>
+                        </div>
                     </div>
 
 
@@ -153,19 +155,27 @@
 
 
 
-//gestisco l'abilitazione del select food_type
 <script>
-    document.getElementById('category_id').addEventListener('change', function() {
+    function toggleFoodType(isOnLoad = false) {
+        const categorySelect = document.getElementById('category_id');
         const foodWrapper = document.getElementById('food_type_wrapper');
-        const selectedText = this.options[this.selectedIndex].text;
+        const selectedText = categorySelect.options[categorySelect.selectedIndex].text;
 
         if (selectedText === 'Food & Drink') {
             foodWrapper.style.display = 'block';
+            if (!isOnLoad) {
+                document.getElementById('food_type').value = '';
+            }
         } else {
             foodWrapper.style.display = 'none';
             document.getElementById('food_type').value = '';
         }
-    });
+    }
+
+    document.getElementById('category_id').addEventListener('change', () => toggleFoodType(false));
+
+    // aspetta che il DOM sia completamente caricato
+    document.addEventListener('DOMContentLoaded', () => toggleFoodType(true));
 </script>
 
 

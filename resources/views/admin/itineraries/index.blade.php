@@ -27,7 +27,7 @@
                             <th class="py-3 small fw-semibold text-uppercase">Contenuti</th>
                             <th class="py-3 small fw-semibold text-uppercase">Tempo Totale</th>
                             <th class="py-3 small fw-semibold text-uppercase">Food</th>
-                            <th class="pe-4 py-3 small fw-semibold text-uppercase text-end">Azioni</th>
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -60,13 +60,6 @@
                                 @endif
                             </td>
 
-                            <td class="pe-4 text-end">
-                                <a href="{{ route('admin.itineraries.show', $itinerary) }}"
-                                   class="btn btn-sm text-white border-0 shadow-sm"
-                                   style="background-color: #2d3d4a; font-size: 0.8rem; border-radius: 6px;">
-                                    Visualizza
-                                </a>
-                            </td>
                         </tr>
                         @empty
                             <tr>
