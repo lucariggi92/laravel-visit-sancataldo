@@ -37,24 +37,40 @@
                     <div class="row mb-4">
 
                         <!-- TITOLO----------------------- -->
-                        <div class="col-md-6">
-                            <label for="title" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Titolo del Contenuto</label>
-                            <input type="text" name="title" id="title" class="form-control border-2" placeholder="Es. Chiesa Madre" required style="border-radius: 8px; height: 45px;" value="{{$content->title}}">
-                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="title" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Titolo del Contenuto</label>
+                                <input type="text" name="title" id="title" class="form-control border-2" placeholder="Es. Chiesa Madre" required style="border-radius: 8px; height: 45px;">
+                            </div>
 
-                         <!-- CATEGORIA----------------------- -->
-
-                        <div class="col-md-6 mt-3 mt-md-0">
-                            <label for="category_id" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Categoria</label>
-                            <select name="category_id" id="category_id" class="form-select border-2" style="height: 45px; border-radius: 8px;" required>
-                                <option value="" selected disabled>Scegli una categoria...</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}"{{$category->id == $content->category_id? "selected" : ""}}>{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
+                            <div class="col-md-6 mt-3 mt-md-0">
+                                <label for="category_id" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Categoria</label>
+                                <select name="category_id" id="category_id" class="form-select border-2" style="height: 45px; border-radius: 8px;" required>
+                                    <option value="" selected disabled>Scegli una categoria...</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                     </div>
+
+                    
+                        {{-- Campo food_type visibile solo se categoria è Food & Drink -------------------}}
+                       {{-- nascosto di default --}}
+                    <div class="row mb-4"  id="food_type_wrapper" style="display: none;">
+                            <div class="col-md-6 ms-auto">
+                                <label for="food_type" class="form-label fw-bold text-uppercase small text-muted" style="letter-spacing: 0.5px;">Tipo di cibo</label>
+                                <select name="food_type" id="food_type" class="form-select border-2" style="height: 45px; border-radius: 8px;">
+                                    <option value="" selected disabled>Scegli il tipo...</option>
+                                    <option value="colazione">☕ Colazione</option>
+                                    <option value="aperitivo">🍹 Aperitivo</option>
+                                    <option value="pranzo">🍝 Pranzo</option>
+                                    <option value="cena">🍽️ Cena</option>
+                                    <option value="mordi e fuggi">🥪 Mordi e fuggi</option>
+                                </select>
+                            </div>
+                    </div>
+
 
 
 
@@ -134,5 +150,23 @@
 
     </div>
 </div>
+
+
+
+//gestisco l'abilitazione del select food_type
+<script>
+    document.getElementById('category_id').addEventListener('change', function() {
+        const foodWrapper = document.getElementById('food_type_wrapper');
+        const selectedText = this.options[this.selectedIndex].text;
+
+        if (selectedText === 'Food & Drink') {
+            foodWrapper.style.display = 'block';
+        } else {
+            foodWrapper.style.display = 'none';
+            document.getElementById('food_type').value = '';
+        }
+    });
+</script>
+
 
 @endsection
