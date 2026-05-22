@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ItineraryController;
+use App\Http\Controllers\Api\ContentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
