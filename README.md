@@ -2,7 +2,7 @@
 
 Backend **Laravel** di **Visit San Cataldo**, applicazione che genera itinerari turistici personalizzati per la città di San Cataldo (CL), Sicilia, in base al mood, al tempo disponibile e alle preferenze dell'utente.
 
-Questo repository espone le **API REST** utilizzate dal [frontend React](#-progetto-collegato) e include un **pannello di amministrazione** per gestire contenuti, categorie, mood e itinerari.
+Questo repository espone le **API REST** utilizzate dal [frontend React](https://github.com/lucariggi92/laravel-react-visit-sancataldo) e include un **pannello di amministrazione** per gestire contenuti, categorie, mood e itinerari.
 
 🔗 Instagram: [@visit_sancataldo](https://www.instagram.com/visit_sancataldo/)
 🔗 Facebook: [Visit San Cataldo](https://www.facebook.com/profile.php?id=61579456103577&locale=it_IT)
