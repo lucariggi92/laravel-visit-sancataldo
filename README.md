@@ -155,11 +155,7 @@ Il frontend React (Vite) che consuma queste API si trova in un repository separa
 
 ## 👤 Autore
 
-Progetto sviluppato da **Luca**, ingegnere ambientale e sviluppatore web, come parte del progetto di comunicazione territoriale **Visit San Cataldo**.
+Progetto sviluppato da **Luca Riggi**
 
 ---
-
-## 📄 Licenza
-
-Progetto privato. Tutti i diritti riservati, salvo diversa indicazione.
 
