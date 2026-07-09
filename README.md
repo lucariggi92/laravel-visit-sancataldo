@@ -135,11 +135,6 @@ npm run dev
 
 e visita `http://localhost:8000` per accedere/registrarti e raggiungere `/dashboard` e le sezioni `/admin/*`.
 
-### CORS
-
-Il file `config/cors.php` è configurato per accettare richieste da qualsiasi origine sulle rotte `api/*`. In produzione è consigliabile restringere `allowed_origins` al dominio del frontend.
-
----
 
 ## 🔗 Progetto collegato
 
