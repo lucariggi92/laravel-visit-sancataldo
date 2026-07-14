@@ -1,66 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌿 Visit San Cataldo — Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backend **Laravel** di **Visit San Cataldo**, applicazione che genera itinerari turistici personalizzati per la città di San Cataldo (CL), Sicilia, in base al mood, al tempo disponibile e alle preferenze dell'utente.
 
-## About Laravel
+Questo repository espone le **API REST** utilizzate dal [frontend React](https://github.com/lucariggi92/laravel-react-visit-sancataldo) e include un **pannello di amministrazione** per gestire contenuti, categorie, mood e itinerari.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+🔗 Instagram: [@visit_sancataldo](https://www.instagram.com/visit_sancataldo/)
+🔗 Facebook: [Visit San Cataldo](https://www.facebook.com/profile.php?id=61579456103577&locale=it_IT)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Funzionalità
 
-## Learning Laravel
+- **API pubblica** per la generazione di itinerari personalizzati e il recupero dei dettagli delle tappe
+- **Pannello admin** (autenticazione via Laravel Breeze) per gestire:
+  - Contenuti/tappe (attrazioni e punti di ristorazione)
+  - Categorie (Arte & Architettura, Siti Archeologici, Natura...)
+  - Mood (curioso, avventuriero, rilassato...)
+  - Itinerari generati
+- **Algoritmo di generazione itinerario**: seleziona le tappe in base a mood e categoria scelti, verifica che il tempo di visita rientri in quello disponibile, aggiunge eventualmente una sosta gastronomica e continua ad aggiungere tappe finché c'è tempo residuo
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🛠️ Stack tecnologico
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **[Laravel 11](https://laravel.com/)** (PHP 8.2+)
+- **[Laravel Sanctum](https://laravel.com/docs/sanctum)** — predisposto per autenticazione API
+- **[Laravel Breeze](https://laravel.com/docs/starter-kits#breeze)** — scaffolding di autenticazione per il pannello admin
+- **Blade** + **Tailwind CSS** / **Bootstrap 5** — viste del pannello admin
+- **SQLite** come database di default (configurabile su MySQL/PostgreSQL)
+- **Vite** — build degli asset del pannello admin
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🗄️ Modello dati
 
-### Premium Partners
+| Tabella | Descrizione |
+|---|---|
+| `categories` | Categorie delle tappe (nome + colore) |
+| `contents` | Tappe/attrazioni: titolo, descrizione, immagine, tempo di visita, tipo di pasto (se ristorazione), categoria collegata |
+| `moods` | Stati d'animo selezionabili dall'utente |
+| `content_mood` | Tabella pivot contenuti ↔ mood |
+| `itineraries` | Itinerari generati: titolo, descrizione, mood, preferenza cibo, tempo disponibile |
+| `content_itinerary` | Tabella pivot contenuti ↔ itinerario |
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+**Relazioni principali:**
+- Un `Content` appartiene a una `Category` e a molti `Mood`
+- Un `Itinerary` ha molti `Content` (tramite pivot)
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🔌 API Endpoints
 
-## Code of Conduct
+| Metodo | Endpoint | Descrizione |
+|---|---|---|
+| `GET` | `/api/itineraries` | Elenco di tutti gli itinerari generati |
+| `POST` | `/api/itineraries` | Genera un nuovo itinerario a partire da `mood`, `category`, `time`, `food` |
+| `GET` | `/api/contents/{content}` | Dettaglio di una singola tappa (con categoria e mood associati) |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Come funziona `POST /api/itineraries`
 
-## Security Vulnerabilities
+1. Filtra i contenuti per `mood` e `category` scelti dall'utente
+2. Seleziona la prima tappa il cui tempo di visita rientra nel tempo disponibile
+3. Se l'utente ha indicato una preferenza alimentare (`food`), aggiunge la prima tappa di ristorazione compatibile con il tempo rimanente
+4. Continua ad aggiungere altre tappe (stesso mood/categoria) finché c'è tempo residuo
+5. Salva l'itinerario e restituisce le tappe selezionate con le relative categorie e mood
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🚀 Setup e avvio in locale
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Requisiti
+
+- PHP 8.2+
+- Composer
+- Node.js e npm (per gli asset del pannello admin)
+- SQLite (o altro DB supportato da Laravel)
+
+### Installazione
+
+```bash
+# clona il repository
+git clone https://github.com/<tuo-username>/laravel-visit-sancataldo.git
+cd laravel-visit-sancandaldo
+
+# installa le dipendenze PHP
+composer install
+
+# installa le dipendenze JS (per il pannello admin)
+npm install
+```
+
+### Configurazione ambiente
+
+```bash
+# copia il file di configurazione
+cp .env.example .env
+
+# genera la chiave dell'applicazione
+php artisan key:generate
+
+# crea il database SQLite (se non presente)
+touch database/database.sqlite
+```
+
+Verifica che nel `.env` sia impostato:
+
+```
+DB_CONNECTION=sqlite
+```
+
+> Per usare MySQL/PostgreSQL, modifica le variabili `DB_*` nel `.env` di conseguenza.
+
+### Migrazioni e seed
+
+```bash
+php artisan migrate --seed
+```
+
+Questo crea le tabelle e popola categorie, mood e contenuti di esempio.
+
+### Avvio del server
+
+```bash
+php artisan serve
+```
+
+L'API sarà disponibile su `http://localhost:8000/api`.
+
+Per il pannello admin, avvia anche il build degli asset front-end:
+
+```bash
+npm run dev
+```
+
+e visita `http://localhost:8000` per accedere/registrarti e raggiungere `/dashboard` e le sezioni `/admin/*`.
+
+
+## 🔗 Progetto collegato
+
+Il frontend React (Vite) che consuma queste API si trova in un repository separato: **Visit San Cataldo — Frontend**.
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Autenticazione API per il frontend pubblico (rate limiting / token)
+- [ ] Validazione strutturata delle richieste (`FormRequest`) su `ItineraryController@store`
+- [ ] Gestione multi-food e itinerari più lunghi (attualmente si ferma al primo food compatibile)
+- [ ] Test automatici su API e algoritmo di generazione itinerario
+- [ ] Paginazione per `GET /api/itineraries`
+- [ ] Deploy in produzione (MySQL/PostgreSQL + storage immagini su cloud)
+
+---
+
+## 👤 Autore
+
+Progetto sviluppato da **Luca Riggi**
+
+---
+
