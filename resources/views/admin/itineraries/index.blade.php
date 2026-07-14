@@ -2,8 +2,56 @@
 
 @section("title", "itinerari")
 
-@section("contenuto")
+{{-- Definiamo lo stile FUORI dalle sezioni principali se il master non ha i push, oppure forziamolo qui --}}
+<style>
+    /* Selettori ad altissima specificità per sovrascrivere Bootstrap 5 */
+    .custom-pagination-wrapper .pagination .page-item .page-link {
+        color: #2d3d4a !important;
+        background-color: #ffffff !important;
+        border-color: #dee2e6 !important;
+    }
 
+    /* Pagina Attiva */
+    .custom-pagination-wrapper .pagination .page-item.active .page-link {
+        background-color: #2d3d4a !important;
+        border-color: #2d3d4a !important;
+        color: #ffffff !important;
+    }
+
+    /* Hover */
+    .custom-pagination-wrapper .pagination .page-item .page-link:hover {
+        color: #ffffff !important;
+        background-color: #1a252f !important;
+        border-color: #1a252f !important;
+    }
+
+    /* Disabilitato */
+    .custom-pagination-wrapper .pagination .page-item.disabled .page-link {
+        color: #6c757d !important;
+        background-color: #f8f9fa !important;
+        border-color: #dee2e6 !important;
+    }
+
+    /* Rimuove l'effetto azzurro nativo di Bootstrap al click */
+    .custom-pagination-wrapper .pagination .page-link:focus {
+        box-shadow: 0 0 0 0.25rem rgba(45, 61, 74, 0.25) !important;
+    }
+
+    /* Fix per la sovrapposizione e la responsività */
+    .custom-pagination-wrapper nav {
+        width: 100%;
+    }
+    
+    .custom-pagination-wrapper nav > div:first-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+</style>
+
+@section("contenuto")
 
 <div class="bg-light min-vh-100 py-5">
     <div class="container">
@@ -27,16 +75,13 @@
                             <th class="py-3 small fw-semibold text-uppercase">Contenuti</th>
                             <th class="py-3 small fw-semibold text-uppercase">Tempo Totale</th>
                             <th class="py-3 small fw-semibold text-uppercase">Food</th>
-                        
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($itineraries as $itinerary)
                         <tr>
                             <td class="ps-4 fw-bold" style="color: #2d3d4a;">{{ $itinerary->title }}</td>
-
                             <td class="text-secondary small">{{ Str::limit($itinerary->description, 50) }}</td>
-
                             <td>
                                 @foreach($itinerary->contents as $content)
                                     <span class="badge rounded px-2 py-1 me-1"
@@ -45,12 +90,10 @@
                                     </span>
                                 @endforeach
                             </td>
-
                             <td class="small text-dark">
                                 <i class="bi bi-clock text-muted me-1"></i>
                                 {{ $itinerary->contents->sum('time_needed_visiting') }} min
                             </td>
-
                             <td>
                                 @php $food = $itinerary->contents->whereNotNull('food_type')->first() @endphp
                                 @if($food)
@@ -59,7 +102,6 @@
                                     <span class="text-muted small">—</span>
                                 @endif
                             </td>
-
                         </tr>
                         @empty
                             <tr>
@@ -74,13 +116,13 @@
                 Totale itinerari: <strong style="color: #2d3d4a;">{{ $itineraries->total() }}</strong>
             </div>
 
-            <div class="d-flex justify-content-center py-3">
+            {{-- Risolto il problema di sovrapposizione qui --}}
+            <div class="d-flex justify-content align-items-center py-3 px-4 bg-white border-0 custom-pagination-wrapper">
                 {{ $itineraries->links('pagination::bootstrap-5') }}
             </div>
         </div>
 
     </div>
 </div>
-
 
 @endsection
