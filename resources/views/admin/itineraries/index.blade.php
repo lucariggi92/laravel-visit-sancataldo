@@ -71,7 +71,11 @@
             </div>
 
             <div class="card-footer bg-white py-3 border-0 border-top text-muted small text-end pe-4">
-                Totale itinerari: <strong style="color: #2d3d4a;">{{ $itineraries->count() }}</strong>
+                Totale itinerari: <strong style="color: #2d3d4a;">{{ $itineraries->total() }}</strong>
+            </div>
+
+            <div class="d-flex justify-content-center py-3">
+                {{ $itineraries->links('pagination::bootstrap-5') }}
             </div>
         </div>
 

@@ -12,7 +12,7 @@ class ItineraryController extends Controller
      */
     public function index()
     {
-         $itineraries = Itinerary::with('contents.category')->get();
+         $itineraries = Itinerary::with('contents.category')->paginate(10);
 
         return view("admin.itineraries.index", compact ("itineraries"));
     }

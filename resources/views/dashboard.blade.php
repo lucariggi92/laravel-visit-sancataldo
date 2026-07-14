@@ -28,7 +28,7 @@
                 </a>
 
                 {{-- Link rapido a React (Utilissimo mentre lavori nel pannello!) --}}
-                <a href="http://localhost:5174/" target="_blank"
+                <a href="http://localhost:5173/" target="_blank"
                    style="color: #00f0ff; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 10px 24px; background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 20px; transition: all 0.2s;"
                    onmouseover="this.style.background='rgba(0, 240, 255, 0.15)'; this.style.borderColor='#00f0ff'"
                    onmouseout="this.style.background='rgba(0, 240, 255, 0.05)'; this.style.borderColor='rgba(0, 240, 255, 0.2)'">
