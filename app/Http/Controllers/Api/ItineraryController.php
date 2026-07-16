@@ -23,6 +23,8 @@ use Illuminate\Http\Request;
 
 
 
+
+
 class ItineraryController extends Controller
 {
     public function index()
