@@ -116,7 +116,7 @@
                 Totale itinerari: <strong style="color: #2d3d4a;">{{ $itineraries->total() }}</strong>
             </div>
 
-            {{-- Risolto il problema di sovrapposizione qui --}}
+
             <div class="d-flex justify-content align-items-center py-3 px-4 bg-white border-0 custom-pagination-wrapper">
                 {{ $itineraries->links('pagination::bootstrap-5') }}
             </div>

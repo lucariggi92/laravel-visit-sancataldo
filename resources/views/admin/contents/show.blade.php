@@ -85,7 +85,7 @@
                         <img src="{{asset("storage/" . $content->image)}}" alt="{{ $content->title }}"
                             style="width: 100%; aspect-ratio: 1/1; object-fit: cover;">
                     @else
-                        <div style="width: 100%; aspect-ratio: 1/1; background-color: #f0f0f0; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 100%; aspect-ratio: 1/1; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
                             <span class="text-muted small">Nessuna immagine</span>
                         </div>
                     @endif
